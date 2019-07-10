@@ -1,0 +1,242 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.pf-c-avatar {
+  --pf-c-avatar--Width: initial !important;
+}
+
+.donut-chart-sm {
+  width: 8em;
+  height: 8em;
+}
+
+.donut-chart-sm tspan {
+  fill: #000000 !important;
+}
+
+.deployment-donut {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deployment-donut .deployment-donut-row {
+  display: flex;
+}
+
+.deployment-donut .deployment-donut-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.deployment-donut .scaling-controls {
+  justify-content: center;
+  font-size: 24px;
+}
+
+.deployment-donut .scaling-controls a {
+  color: #bbb;
+}
+
+.topo-middle {
+  margin: auto;
+}
+
+.topo-name {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.force-graph {
+  min-height: 480px;
+  height: 800px;
+}
+
+.node.interior path {
+  fill: green;
+  stroke-width: 1;
+  stroke: green;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.node.selected circle, .node.edgeClass.selected circle {
+  stroke-width: 4px;
+  stroke: green;
+  fill: #EAEAEA;
+}
+
+.node text {
+  fill: #000;
+  stroke: none;
+  font-size: .8em;
+}
+
+g.over line {
+  stroke: #000;
+  stroke-width: 4;
+}
+
+g.selected line {
+  stroke: green;
+  stroke-width: 4;
+}
+
+.link {
+  stroke: #000;
+}
+
+path.hittarget {
+  stroke-width: 15px;
+  stroke: transparent;
+}
+
+.node.client rect {
+  stroke: black;
+  fill: white;
+}
+
+.node.edgeClass circle {
+  stroke: black;
+  fill: white;
+  stroke-width: 2;
+  stroke-dasharray: 4;
+}
+
+.tag-line {
+  font-size: 0.8em;
+  color: #888888;
+}
+
+.deployment-donut.table-cell button {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.deployment-donut.table-cell .scaling-controls {
+  font-size: 14px;
+}
+
+.address-table-container {
+  width: 31em;
+}
+
+.no-addresses {
+  margin-top: 1em;
+}
+
+.form-sub-group {
+  margin-left: 3em;
+}
+
+.sm-input {
+  width: 6em !important;
+}
+
+.incdec-label {
+  padding-left: 1em;
+}
+
+.incdec-label.disabled {
+  color: #555555;
+}
+
+.messages-receivers {
+  display: none !important;
+}
+
+.topology-header line {
+  stroke: white;
+}
+
+.network-name {
+  width: 48em;
+  margin: auto !important;
+}
+
+.not-editing-cancel {
+  display: none !important;
+}
+
+.not-editing {
+  border: 0 0 1px 0 !important;
+}
+
+path.cloud-outline {
+  stroke-width: 3px;
+  stroke: #DDD3;
+  fill: white;
+}
+
+.network-toolbar {
+  padding-bottom: 1em;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.context-form {
+  text-align: left;
+    min-width: 34em;
+    padding-left: 2em;
+    margin-right: 0;
+    border-left: 1px solid lightgray;
+}
+
+.enter-prompt {
+  padding-top: 0.25em;
+}
+
+.edge-table-actions {
+  position: absolute;
+  right: 1em;
+}
+
+.empty-selection {
+  max-width: 30em;
+}
+
+.link-label {
+  margin-left: 1em;
+  font-weight: bold;
+}
+
+.logo-text {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
