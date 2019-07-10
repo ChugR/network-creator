@@ -10,7 +10,7 @@ class TopologyContext extends React.Component {
 
     this.contexts = {
       interior: {
-        title: "Cluster connector",
+        title: "Cluster",
         fields: [
           { title: "Name", type: "text", isRequired: true },
           { title: "Route-suffix", type: "text", isRequired: this.isRequired },

@@ -22,8 +22,8 @@ class EmptySelection extends React.Component {
           Nothing selected
         </Title>
         <EmptyStateBody>
-          Select a cluster connector, edge class, or line between them to
-          view/edit their information.
+          Select a cluster, edge class, or line between them to view/edit their
+          information.
         </EmptyStateBody>
       </EmptyState>
     );

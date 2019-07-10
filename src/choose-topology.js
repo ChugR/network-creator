@@ -257,7 +257,7 @@ class ChooseTopology extends React.Component {
                   onClick={this.handleAddInterior}
                   variant="tertiary"
                 >
-                  Add Cluster Connector
+                  Add Cluster
                 </Button>
               </ToolbarItem>
               <ToolbarItem className="pf-u-mx-md">
