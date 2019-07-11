@@ -37,7 +37,7 @@ class EdgeTable extends React.Component {
 
   handleEdgeNameClick = rowIndex => {
     this.onSelect("", true, rowIndex);
-    this.setState({ editingEdgeRow: rowIndex });
+    this.setState({ editingEdgeRow: rowIndex, filterText: "" });
   };
 
   handleEdgeKeyPress = event => {
