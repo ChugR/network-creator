@@ -2,6 +2,7 @@ import React from "react";
 import {
   ActionGroup,
   Button,
+  ClipboardCopy,
   Form,
   FormGroup,
   TextInput,
@@ -58,13 +59,34 @@ class FieldDetails extends React.Component {
         );
       });
     } else if (field.type === "states") {
+      const currentNode = this.props.networkInfo.nodes.find(
+        n => n.key === this.props.selectedKey
+      );
       return field.options.map((o, i) => {
+        let yaml = <div className="state-placeholder"></div>;
+        if (currentNode.yaml && i === 1) {
+          yaml = (
+            <ClipboardCopy
+              className="state-copy"
+              onClick={(event, text) => {
+                const clipboard = event.currentTarget.parentElement;
+                const el = document.createElement("input");
+                el.value = JSON.stringify(currentNode.yaml);
+                clipboard.appendChild(el);
+                el.select();
+                document.execCommand("copy");
+                clipboard.removeChild(el);
+              }}
+            />
+          );
+        }
         return (
           <div
-            className="pf-c-check"
+            className="state-container"
             key={`key-checkbox-${o}-${i}`}
             id={`${field.title}-${i}`}
           >
+            {yaml}
             <Graph
               id={`State-${i}`}
               thumbNail={true}
@@ -81,7 +103,7 @@ class FieldDetails extends React.Component {
               links={[]}
               notifyCurrentRouter={() => {}}
             />
-            {o}
+            <div className="state-text">{o}</div>
           </div>
         );
       });

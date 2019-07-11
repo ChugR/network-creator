@@ -240,3 +240,33 @@ path.cloud-outline {
   color: white;
   font-weight: bold;
 }
+
+.state-copy input {
+  display: none;
+}
+
+.state-copy {
+  display: inline-block;
+}
+.state-container svg {
+  position: relative;
+  top: 0.5em;
+}
+
+.state-placeholder {
+  width: 16px;
+  height: 24px;
+  display: inline-block;
+}
+
+.state-text {
+  display: inline-block;
+}
+
+div.state-container button.pf-c-clipboard-copy__group-copy {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  top: -.5em;
+}

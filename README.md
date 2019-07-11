@@ -1,10 +1,35 @@
-If you have yarn installed, please use these commands to initialize and start the app:
+# Initialization
+Initialization only needs to be done once.
+If you have yarn installed, please use this command to initialize the app:
 ```
 $ yarn install
-$ yarn start
+```
+If you have npm:
+```
+$ npm install
 ```
 
-Otherwise, you can use the npm commands below.
+# Running the console
+To start the console, first build the app and then start the server.
+
+## Build
+```
+$ yarn build
+```
+or
+```
+$ npm run build
+```
+
+## Start running
+Change to the build directory and start the server.
+```
+$ cd build
+$ node server.js
+```
+
+# Development
+React can serve the web pages during development of the UI, but please note, none of the REST calls will succeed. In order for the web pages to communicate with the back-end, you'll need to run the server.js file in the build directory as described above.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

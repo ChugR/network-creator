@@ -9,6 +9,8 @@
     "@patternfly/react-icons": "^3.10.4",
     "@patternfly/react-styles": "^3.3.3",
     "@patternfly/react-table": "^2.11.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "lodash-es": "^4.17.11",
     "patternfly-react": "^2.36.1",
     "prettier": "^1.18.2",

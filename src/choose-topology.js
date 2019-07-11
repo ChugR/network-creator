@@ -16,6 +16,7 @@ import Graph from "./graph";
 import NetworkName from "./network-name";
 import TopologyContext from "./topology-context";
 import NodesLinks from "./nodeslinks";
+import REST from "./REST";
 
 class ChooseTopology extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class ChooseTopology extends React.Component {
       selectedKey: null
     };
     this.nodesLinks = new NodesLinks();
+    this.REST = new REST();
   }
 
   componentDidMount() {
@@ -55,8 +57,20 @@ class ChooseTopology extends React.Component {
       networkInfo,
       dimensions
     );
+    newNode["Cluster type"] = "unknown";
     selectedKey = newNode.key;
     this.setState({ selectedKey, networkInfo });
+    this.REST.getDeploymentYaml(networkInfo, newNode.Name).then(
+      response => {
+        newNode.state = 1;
+        newNode.yaml = response;
+        this.setState({ networkInfo });
+      },
+      error => {
+        console.log(`error getting deployment for ${newNode.Name}`);
+        console.log(error);
+      }
+    );
   };
 
   handleAddEdgeClass = () => {

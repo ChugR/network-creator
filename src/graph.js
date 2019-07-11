@@ -184,6 +184,17 @@ class Graph extends React.Component {
     const circles = d3.selectAll("g.node.network");
     circles.classed("selected", d => d.key === props.selectedKey);
 
+    // update the interior node state
+    d3.selectAll("g.node.network.interior path").attr("d", d =>
+      d3.svg
+        .arc()
+        .innerRadius(0)
+        .outerRadius(d.r)({
+        startAngle: 0,
+        endAngle: (d.state * 2.0 * Math.PI) / 3.0
+      })
+    );
+
     d3.selectAll("svg text").each(function(d) {
       d3.select(this).text(d.Name);
     });
