@@ -17,8 +17,12 @@ class EdgeTable extends React.Component {
       columns: [{ title: "Name", cellFormatters: [this.formatName] }],
       filterText: "",
       sortDown: true,
-      editingEdgeRow: -1
+      editingEdgeRow: -1,
+      page: 1,
+      perPage: 5
     };
+
+    this.rows = [];
   }
 
   onSelect = (event, isSelected, rowId) => {
@@ -31,13 +35,15 @@ class EdgeTable extends React.Component {
   };
 
   handleEdgeNameBlur = () => {
+    console.log("blur of edgename");
     this.onSelect("", false, -1);
     this.setState({ editingEdgeRow: -1 });
   };
 
   handleEdgeNameClick = rowIndex => {
+    console.log(`click of edgename ${rowIndex}`);
     this.onSelect("", true, rowIndex);
-    this.setState({ editingEdgeRow: rowIndex, filterText: "" });
+    this.setState({ editingEdgeRow: rowIndex });
   };
 
   handleEdgeKeyPress = event => {
@@ -47,6 +53,7 @@ class EdgeTable extends React.Component {
   };
 
   formatName = (value, _xtraInfo) => {
+    console.log("formatName called");
     const realRowIndex = this.props.rows.findIndex(
       r => r.key === _xtraInfo.rowData.key
     );
@@ -94,24 +101,40 @@ class EdgeTable extends React.Component {
     console.log(this.props.rows);
     const { columns, filterText } = this.state;
     if (this.props.rows.length > 0) {
-      this.rows = this.props.rows.map(r => ({
-        cells: [r.cells[0]],
-        selected: r.selected,
-        key: r.key
-      }));
-      // sort the rows
-      this.rows = this.rows.sort((a, b) =>
-        a.cells[0] < b.cells[0] ? -1 : a.cells[0] > b.cells[0] ? 1 : 0
-      );
-      if (!this.state.sortDown) {
-        this.rows = this.rows.reverse();
+      if (this.state.editingEdgeRow === -1 || this.rows.length === 0) {
+        this.rows = this.props.rows.map(r => ({
+          cells: [r.cells[0]],
+          selected: r.selected,
+          key: r.key
+        }));
+        // sort the rows
+        this.rows = this.rows.sort((a, b) =>
+          a.cells[0] < b.cells[0] ? -1 : a.cells[0] > b.cells[0] ? 1 : 0
+        );
+        if (!this.state.sortDown) {
+          this.rows = this.rows.reverse();
+        }
+        // filter the rows
+        if (filterText !== "") {
+          this.rows = this.rows.filter(
+            r => r.cells[0].indexOf(filterText) >= 0
+          );
+        }
+        // only show rows on current page
+        const start = (this.state.page - 1) * this.state.perPage;
+        const end = Math.min(this.rows.length, start + this.state.perPage);
+        this.rows = this.rows.slice(start, end);
+      } else {
+        // pickup any changed info
+        this.rows.forEach(r => {
+          const rrow = this.props.rows.find(rr => rr.key === r.key);
+          if (rrow) {
+            r.selected = rrow.selected;
+            r.cells[0] = rrow.cells[0];
+          }
+        });
       }
-      // filter the rows
-      if (filterText !== "") {
-        this.rows = this.rows.filter(r => r.cells[0].indexOf(filterText) >= 0);
-      }
-      // only show to 5
-      this.rows = this.rows.slice(0, 5);
+
       console.log(this.rows);
       return (
         <React.Fragment>
@@ -131,7 +154,11 @@ class EdgeTable extends React.Component {
   };
 
   handleChangeFilter = filterText => {
-    this.setState({ filterText });
+    let { page } = this.state;
+    if (filterText !== "") {
+      page = 1;
+    }
+    this.setState({ filterText, page });
   };
 
   genToolbar = () => {
@@ -153,9 +180,29 @@ class EdgeTable extends React.Component {
     }
   };
 
+  onSetPage = (_event, pageNumber) => {
+    this.setState({
+      page: pageNumber
+    });
+  };
+
+  onPerPageSelect = (_event, perPage) => {
+    this.setState({
+      perPage
+    });
+  };
+
   genPagination = () => {
     if (this.props.rows.length > 0) {
-      return <EdgeTablePagination />;
+      return (
+        <EdgeTablePagination
+          rows={this.props.rows.length}
+          perPage={this.state.perPage}
+          page={this.state.page}
+          onPerPageSelect={this.onPerPageSelect}
+          onSetPage={this.onSetPage}
+        />
+      );
     }
   };
   render() {
